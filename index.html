@@ -27,8 +27,8 @@
 
         /* Tarjeta semi-transparente oscura estilo Glassmorphism */
         .card {
-            background: rgba(20, 20, 25, 0.82); /* Oscuro semi-transparente */
-            backdrop-filter: blur(12px);         /* Efecto borroso elegante */
+            background: rgba(20, 20, 25, 0.82);
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             max-width: 650px;
             margin: 0 auto;
@@ -193,20 +193,20 @@
 
         <!-- Bloques de Contadores -->
         <div class="counter-container">
-            <!-- Visitas -->
+            <!-- Visitas con 👀 -->
             <div class="counter-box">
                 <p>Visitas:</p>
                 <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
-                <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
+                <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&label=%F0%9F%90%81%20Visitas&count_bg=%232563EB&title=Visitas" alt="Visitas"/>
             </div>
 
-            <!-- Me Gusta -->
+            <!-- Me Gusta con ❤️ -->
             <div class="counter-box">
                 <p>¿Te gusta esta página?</p>
                 <button class="like-btn" onclick="darMeGusta()">👍 ¡Me gusta!</button>
                 <br><br>
                 <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
-                <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&count_bg=%23e11d48&title=Likes" alt="Contador de likes"/>
+                <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&label=%E2%9D%A4%EF%B8%8F%20Likes&count_bg=%23e11d48&title=Likes" alt="Likes"/>
             </div>
         </div>
 
@@ -240,14 +240,12 @@
     </div>
 
     <script>
-        // Función para el botón de Me Gusta
         function darMeGusta() {
             const badge = document.getElementById('like-badge');
             const baseUrl = badge.src.split('&t=')[0];
             badge.src = baseUrl + '&t=' + new Date().getTime();
         }
 
-        // Cargar comentarios guardados en el navegador
         document.addEventListener('DOMContentLoaded', cargarComentarios);
 
         function agregarComentario(event) {
@@ -263,18 +261,14 @@
 
             const nuevoComentario = { author, text, date: new Date().toLocaleDateString() };
 
-            // Obtener comentarios existentes
             let comentarios = JSON.parse(localStorage.getItem('mis_comentarios') || '[]');
             comentarios.unshift(nuevoComentario);
 
-            // Guardar en localStorage
             localStorage.setItem('mis_comentarios', JSON.stringify(comentarios));
 
-            // Limpiar inputs
             authorInput.value = '';
             commentInput.value = '';
 
-            // Renderizar
             renderizarComentarios(comentarios);
         }
 
