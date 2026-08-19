@@ -22,11 +22,28 @@
         }
         h1 { color: #2c3e50; }
         .counter-box {
-            margin-top: 30px;
+            margin-top: 20px;
             padding: 15px;
             background: #eef2f3;
             border-radius: 8px;
-            display: inline-block;
+            display: block;
+        }
+        .like-btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .like-btn:hover {
+            background-color: #1d4ed8;
+        }
+        .like-btn:active {
+            transform: scale(0.96);
         }
     </style>
 </head>
@@ -36,12 +53,33 @@
         <h1>¡Bienvenidos a mi página!</h1>
         <p>Gracias por visitar mi sitio web.</p>
 
+        <!-- Contador de Visitas -->
         <div class="counter-box">
-            <p><strong>Contador de visitas:</strong></p>
-            <!-- Contador automático -->
-            <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
+            <p style="margin-top:0; font-weight:bold;">Contador de visitas:</p>
+            <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
+            <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
+        </div>
+
+        <!-- Botón y Contador de Likes -->
+        <div class="counter-box">
+            <p style="margin-top:0; font-weight:bold;">¿Te gusta esta página?</p>
+            <button class="like-btn" onclick="darMeGusta()">
+                👍 ¡Me gusta!
+            </button>
+            <br><br>
+            <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
+            <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&count_bg=%23e11d48&title=Likes" alt="Contador de likes"/>
         </div>
     </div>
+
+    <script>
+        function darMeGusta() {
+            const badge = document.getElementById('like-badge');
+            // Agrega un parámetro de tiempo para forzar la actualización de la imagen al hacer clic
+            const baseUrl = badge.src.split('&t=')[0];
+            badge.src = baseUrl + '&t=' + new Date().getTime();
+        }
+    </script>
 
 </body>
 </html>
