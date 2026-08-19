@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
+    <title>Conflicto Sur Mod</title>
     <style>
         * {
             box-sizing: border-box;
@@ -27,19 +27,19 @@
 
         /* Tarjeta semi-transparente oscura estilo Glassmorphism */
         .card {
-            background: rgba(20, 20, 25, 0.82);
+            background: rgba(20, 20, 25, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            max-width: 650px;
+            max-width: 750px;
             margin: 0 auto;
             padding: 35px 30px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: left;
         }
         
-        h1 { 
+        h1.welcome-title { 
             color: #ffffff; 
             text-align: center; 
             margin-top: 0;
@@ -52,6 +52,48 @@
             margin-bottom: 25px;
         }
 
+        /* ESTILOS DE TÍTULOS Y TEXTO DE LA RESEÑA */
+        .mod-title {
+            color: #ffffff;
+            text-align: center;
+            font-size: 32px;
+            margin-top: 30px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .battle-subtitle {
+            color: #ff3333;
+            text-align: center;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .review-section {
+            margin-top: 25px;
+            line-height: 1.6;
+            color: #ffffff;
+        }
+
+        .review-section h2, .review-section h3 {
+            color: #ffcc00; /* Títulos en amarillo */
+            margin-top: 25px;
+            margin-bottom: 12px;
+            font-size: 20px;
+        }
+
+        .review-section p {
+            color: #ffffff; /* Texto en blanco */
+            margin-bottom: 16px;
+            text-align: justify;
+            font-size: 15px;
+        }
+
+        /* CONTADORES */
         .counter-container {
             display: flex;
             gap: 15px;
@@ -99,7 +141,7 @@
 
         /* SECCIÓN DE COMENTARIOS */
         .comments-section {
-            margin-top: 30px;
+            margin-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.15);
             padding-top: 25px;
         }
@@ -188,8 +230,12 @@
 <body>
 
     <div class="card">
-        <h1>¡Bienvenidos a mi página!</h1>
+        <h1 class="welcome-title">¡Bienvenidos a mi página!</h1>
         <p class="subtitle">Gracias por visitar mi sitio web.</p>
+
+        <!-- Títulos solicitados -->
+        <h1 class="mod-title">Conflicto Sur Mod</h1>
+        <h2 class="battle-subtitle">Campo de Batalla</h2>
 
         <!-- Bloques de Contadores -->
         <div class="counter-container">
@@ -197,7 +243,7 @@
             <div class="counter-box">
                 <p>Visitas:</p>
                 <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
-                <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FTremy-d-sagita%2Fmi-pagina-visitas&label=%F0%9F%91%80%20Visitas&count_bg=%232563EB&title=Visitas" alt="Visitas"/>
+                <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&label=%F0%9F%91%80%20Visitas&count_bg=%232563EB&title=Visitas" alt="Visitas"/>
             </div>
 
             <!-- Me Gusta con ❤️ -->
@@ -206,8 +252,39 @@
                 <button class="like-btn" onclick="darMeGusta()">👍 ¡Me gusta!</button>
                 <br><br>
                 <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
-                <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FTremy-d-sagita%2Fmi-pagina-likes&label=%E2%9D%A4%EF%B8%8F%20Likes&count_bg=%23e11d48&title=Likes" alt="Likes"/>
+                <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&label=%E2%9D%A4%EF%B8%8F%20Likes&count_bg=%23e11d48&title=Likes" alt="Likes"/>
             </div>
+        </div>
+
+        <!-- RESEÑA DEL MOD -->
+        <div class="review-section">
+            <h2>Reseña del mod Conflicto Sur para Battlefield 2</h2>
+            <p>Conflicto Sur es un proyecto de conversión total desarrollado para Battlefield 2 que propone una interesante reinterpretación del clásico juego de combate, trasladando su escenario de guerra desde los conflictos tradicionales hacia un contexto ficticio inspirado en América del Sur.</p>
+
+            <p>El mod destaca por incorporar fuerzas armadas latinoamericanas, equipamiento militar adaptado a la región, nuevos camuflajes, armas, vehículos, insignias y diferentes elementos visuales que buscan darle una identidad propia. Entre las fuerzas representadas se encuentran países como Perú, Argentina, Chile, Ecuador, Brasil, Bolivia, Venezuela y Colombia, creando un escenario alternativo en el que los enfrentamientos militares se desarrollan entre naciones de la región.</p>
+
+            <p>Uno de los principales atractivos de Conflicto Sur son sus escenarios regionales ficticios. El proyecto incluye mapas ambientados en diferentes entornos de Sudamérica, tanto de día como de noche, diseñados para representar hipotéticos conflictos y operaciones tácticas. De esta manera, el jugador puede experimentar la jugabilidad de Battlefield 2 desde una perspectiva diferente, con escenarios y situaciones inspirados en la geografía y el contexto militar latinoamericano.</p>
+
+            <p>Otro aspecto importante es el trabajo realizado sobre el equipamiento y las texturas. El mod incorpora modelos y modificaciones visuales que buscan representar uniformes, camuflajes, parches e iconografía relacionados con las fuerzas militares de la región. Estos elementos contribuyen a diferenciar a las distintas facciones y a construir una identidad visual característica del proyecto.</p>
+
+            <h2>El trabajo de Miranda Tremy</h2>
+            <p>El desarrollo de Conflicto Sur está asociado a Miranda Tremy, también conocido como TremyDsagita, quien publicó avances y contenido relacionado con el proyecto en YouTube bajo el canal @caelmiranda9845.</p>
+
+            <p>Antes de desarrollar Conflicto Sur, Miranda Tremy ya había adquirido experiencia modificando y adaptando contenido de Battlefield 2. Entre los proyectos y mods en los que trabajó se encuentran AIX2, RUSmarines, DZB2, BATTLE OF HONOR V2.4.2 e Iron Will, especialmente mediante la edición y adaptación de mapas.</p>
+
+            <p>Ese trabajo previo fue importante para la evolución del proyecto, ya que permitió desarrollar conocimientos y experiencia en modificación de mapas, texturas y diferentes elementos del juego. Posteriormente, esa experiencia desembocó en la creación de un proyecto propio: Conflicto Sur.</p>
+
+            <h2>Evolución del proyecto</h2>
+            <p>El mod tuvo diferentes versiones y actualizaciones, entre ellas 1.2.3, 1.2.6 y 1.2.9, mostrando una evolución progresiva del proyecto. Cada versión representa parte del proceso de desarrollo y perfeccionamiento de la propuesta, incorporando modificaciones y mejoras destinadas a ampliar la experiencia de juego.</p>
+
+            <p>Más allá de ser simplemente una modificación de Battlefield 2, Conflicto Sur puede considerarse un proyecto de carácter regional dentro de la comunidad de modding del juego. Su principal particularidad es haber tomado la estructura de Battlefield 2 y haberla utilizado como base para construir un universo ficticio centrado específicamente en conflictos militares latinoamericanos.</p>
+
+            <h2>Conclusión</h2>
+            <p>Conflicto Sur representa una propuesta singular dentro del universo de modificaciones de Battlefield 2. Su combinación de facciones latinoamericanas, mapas ficticios inspirados en Sudamérica, equipamiento personalizado, camuflajes y escenarios diurnos y nocturnos le proporciona una identidad diferenciada.</p>
+
+            <p>El proyecto también refleja el proceso de aprendizaje y evolución de su creador, Miranda Tremy (TremyDsagita), quien previamente worked con otros mods y mapas antes de desarrollar su propia conversión total.</p>
+
+            <p>En definitiva, Conflicto Sur es un proyecto que busca llevar la experiencia de Battlefield 2 a un escenario poco habitual dentro del modding del juego: una Sudamérica ficticia convertida en escenario de conflictos militares, ofreciendo a los jugadores una perspectiva regional y personalizada del clásico título de DICE.</p>
         </div>
 
         <!-- SECCIÓN DE COMENTARIOS -->
