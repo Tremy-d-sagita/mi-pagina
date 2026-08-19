@@ -5,16 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Página Web</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            color: #333;
-            padding: 50px 20px;
+            color: #ffffff;
+            padding: 40px 15px;
             margin: 0;
             min-height: 100vh;
             
-            /* --- IMAGEN DE FONDO DESDE GITHUB --- */
-            /* Si tu imagen termina en .png o .jpeg, cambia .jpg por su extensión correcta */
+            /* IMAGEN DE FONDO */
             background-image: url('fondo.jpg');
             background-size: cover;
             background-position: center;
@@ -22,29 +25,61 @@
             background-repeat: no-repeat;
         }
 
+        /* Tarjeta semi-transparente oscura estilo Glassmorphism */
         .card {
-            background: rgba(255, 255, 255, 0.92);
-            max-width: 500px;
+            background: rgba(20, 20, 25, 0.82); /* Oscuro semi-transparente */
+            backdrop-filter: blur(12px);         /* Efecto borroso elegante */
+            -webkit-backdrop-filter: blur(12px);
+            max-width: 650px;
             margin: 0 auto;
-            padding: 30px;
+            padding: 35px 30px;
             border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
         }
         
-        h1 { color: #2c3e50; }
+        h1 { 
+            color: #ffffff; 
+            text-align: center; 
+            margin-top: 0;
+            font-size: 28px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: #cccccc;
+            margin-bottom: 25px;
+        }
+
+        .counter-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
 
         .counter-box {
-            margin-top: 20px;
             padding: 15px;
-            background: #eef2f3;
-            border-radius: 8px;
-            display: block;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .counter-box p {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #e2e8f0;
         }
 
         .like-btn {
-            padding: 12px 24px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 15px;
             font-weight: bold;
             cursor: pointer;
             background-color: #2563eb;
@@ -61,38 +96,211 @@
         .like-btn:active {
             transform: scale(0.96);
         }
+
+        /* --- SECCIÓN DE COMENTARIOS --- */
+        .comments-section {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 25px;
+        }
+
+        .comments-section h2 {
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .input-field, .textarea-field {
+            width: 100%;
+            background: rgba(35, 38, 45, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 6px;
+            padding: 12px 15px;
+            color: #ffffff;
+            font-size: 14px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .input-field::placeholder, .textarea-field::placeholder {
+            color: #888888;
+        }
+
+        .input-field:focus, .textarea-field:focus {
+            border-color: #2563eb;
+        }
+
+        .textarea-field {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: #0075ff;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #005bb5;
+        }
+
+        .comments-list {
+            margin-top: 25px;
+        }
+
+        .comment-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+        }
+
+        .comment-author {
+            font-weight: bold;
+            color: #60a5fa;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .comment-text {
+            color: #e2e8f0;
+            font-size: 14px;
+            margin: 0;
+            word-break: break-word;
+        }
+
+        .empty-comments {
+            color: #888888;
+            font-size: 14px;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
         <h1>¡Bienvenidos a mi página!</h1>
-        <p>Gracias por visitar mi sitio web.</p>
+        <p class="subtitle">Gracias por visitar mi sitio web.</p>
 
-        <!-- Contador de Visitas -->
-        <div class="counter-box">
-            <p style="margin-top:0; font-weight:bold;">Contador de visitas:</p>
+        <!-- Bloques de Contadores -->
+        <div class="counter-container">
+            <!-- Visitas -->
+            <div class="counter-box">
+                <p>Visitas:</p>
+                <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
+                <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
+            </div>
 
-            <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
+            <!-- Me Gusta -->
+            <div class="counter-box">
+                <p>¿Te gusta esta página?</p>
+                <button class="like-btn" onclick="darMeGusta()">👍 ¡Me gusta!</button>
+                <br><br>
+                <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
+                <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&count_bg=%23e11d48&title=Likes" alt="Contador de likes"/>
+            </div>
         </div>
 
-        <!-- Botón y Contador de Likes -->
-        <div class="counter-box">
-            <p style="margin-top:0; font-weight:bold;">¿Te gusta esta página?</p>
-            <button class="like-btn" onclick="darMeGusta()">
-                👍 ¡Me gusta!
-            </button>
-            <br><br>
+        <!-- SECCIÓN DE COMENTARIOS -->
+        <div class="comments-section">
+            <h2>Comentarios</h2>
+            
+            <form id="commentForm" onsubmit="agregarComentario(event)">
+                <input 
+                    type="text" 
+                    id="authorInput" 
+                    class="input-field" 
+                    placeholder="Tu Nombre o Alias (ej. Soldado123)..." 
+                    required 
+                />
+                
+                <textarea 
+                    id="commentInput" 
+                    class="textarea-field" 
+                    placeholder="Escribe tu comentario sobre la página..." 
+                    required
+                ></textarea>
+                
+                <button type="submit" class="submit-btn">Publicar Comentario</button>
+            </form>
 
-            <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&count_bg=%23e11d48&title=Likes" alt="Contador de likes"/>
+            <div class="comments-list" id="commentsList">
+                <p class="empty-comments" id="emptyMessage">Aún no hay comentarios. ¡Sé el primero!</p>
+            </div>
         </div>
     </div>
 
     <script>
+        // Función para el botón de Me Gusta
         function darMeGusta() {
             const badge = document.getElementById('like-badge');
             const baseUrl = badge.src.split('&t=')[0];
             badge.src = baseUrl + '&t=' + new Date().getTime();
+        }
+
+        // Cargar comentarios guardados en el navegador
+        document.addEventListener('DOMContentLoaded', cargarComentarios);
+
+        function agregarComentario(event) {
+            event.preventDefault();
+
+            const authorInput = document.getElementById('authorInput');
+            const commentInput = document.getElementById('commentInput');
+
+            const author = authorInput.value.trim();
+            const text = commentInput.value.trim();
+
+            if (!author || !text) return;
+
+            const nuevoComentario = { author, text, date: new Date().toLocaleDateString() };
+
+            // Obtener comentarios existentes
+            let comentarios = JSON.parse(localStorage.getItem('mis_comentarios') || '[]');
+            comentarios.unshift(nuevoComentario);
+
+            // Guardar en localStorage
+            localStorage.setItem('mis_comentarios', JSON.stringify(comentarios));
+
+            // Limpiar inputs
+            authorInput.value = '';
+            commentInput.value = '';
+
+            // Renderizar
+            renderizarComentarios(comentarios);
+        }
+
+        function cargarComentarios() {
+            let comentarios = JSON.parse(localStorage.getItem('mis_comentarios') || '[]');
+            renderizarComentarios(comentarios);
+        }
+
+        function renderizarComentarios(comentarios) {
+            const list = document.getElementById('commentsList');
+
+            if (comentarios.length === 0) {
+                list.innerHTML = '<p class="empty-comments">Aún no hay comentarios. ¡Sé el primero!</p>';
+                return;
+            }
+
+            list.innerHTML = comentarios.map(c => `
+                <div class="comment-item">
+                    <div class="comment-author">${escapeHtml(c.author)}</div>
+                    <p class="comment-text">${escapeHtml(c.text)}</p>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 
