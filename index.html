@@ -8,19 +8,32 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f9;
             color: #333;
             padding: 50px 20px;
+            margin: 0;
+            min-height: 100vh;
+            
+            /* --- IMAGEN DE FONDO DESDE GITHUB --- */
+            /* Si tu imagen termina en .png o .jpeg, cambia .jpg por su extensión correcta */
+            background-image: url('fondo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
+
         .card {
-            background: white;
+            background: rgba(255, 255, 255, 0.92);
             max-width: 500px;
             margin: 0 auto;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
         }
+        
         h1 { color: #2c3e50; }
+
         .counter-box {
             margin-top: 20px;
             padding: 15px;
@@ -28,6 +41,7 @@
             border-radius: 8px;
             display: block;
         }
+
         .like-btn {
             padding: 12px 24px;
             font-size: 16px;
@@ -39,9 +53,11 @@
             border-radius: 8px;
             transition: background-color 0.2s, transform 0.1s;
         }
+
         .like-btn:hover {
             background-color: #1d4ed8;
         }
+
         .like-btn:active {
             transform: scale(0.96);
         }
@@ -56,8 +72,8 @@
         <!-- Contador de Visitas -->
         <div class="counter-box">
             <p style="margin-top:0; font-weight:bold;">Contador de visitas:</p>
-            <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
-            <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FTremy-d-sagita%2Fmi-pagina-visitas&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
+
+            <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&count_bg=%232563EB&title=Visitas" alt="Contador de visitas"/>
         </div>
 
         <!-- Botón y Contador de Likes -->
@@ -67,15 +83,14 @@
                 👍 ¡Me gusta!
             </button>
             <br><br>
-            <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
-            <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FTremy-d-sagita%2Fmi-pagina-likes&count_bg=%23e11d48&title=Likes" alt="Contador de likes"/>
+
+            <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&count_bg=%23e11d48&title=Likes" alt="Contador de likes"/>
         </div>
     </div>
 
     <script>
         function darMeGusta() {
             const badge = document.getElementById('like-badge');
-            // Agrega un parámetro de tiempo para forzar la actualización de la imagen al hacer clic
             const baseUrl = badge.src.split('&t=')[0];
             badge.src = baseUrl + '&t=' + new Date().getTime();
         }
