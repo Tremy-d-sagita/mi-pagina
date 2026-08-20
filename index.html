@@ -272,9 +272,9 @@
             font-weight: 500;
         }
 
-        /* Tarjeta Verde de Descarga (Basada en la imagen) */
+        /* Tarjeta Verde de Descarga */
         .download-card {
-            display: none; /* Oculto hasta resolver el captcha */
+            display: none;
             background: #143528;
             border: 1px solid #2d6a4f;
             border-radius: 10px;
@@ -503,7 +503,7 @@
             margin-top: 15px;
         }
 
-        /* REPRODUCTOR DE MÚSICA FLOTANTE ESTILO IMAGEN */
+        /* REPRODUCTOR DE MÚSICA FLOTANTE */
         .music-player-widget {
             position: fixed;
             bottom: 20px;
@@ -540,7 +540,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Personalización del Range Slider */
         .volume-slider {
             -webkit-appearance: none;
             appearance: none;
@@ -552,7 +551,6 @@
             cursor: pointer;
         }
 
-        /* Botón del slider (Thumb) */
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -591,7 +589,6 @@
             <!-- Visitas -->
             <div class="counter-box">
                 <p>Visitas:</p>
-                <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
                 <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&label=%F0%9F%91%80%20Visitas&count_bg=%232563EB&title=Visitas" alt="Visitas"/>
             </div>
 
@@ -600,7 +597,6 @@
                 <p>¿Te gusta esta página?</p>
                 <button class="like-btn" onclick="darMeGusta()">👍 ¡Me gusta!</button>
                 <br><br>
-                <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
                 <img id="like-badge" src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-likes&label=%E2%9D%A4%EF%B8%8F%20Likes&count_bg=%23e11d48&title=Likes" alt="Likes"/>
             </div>
         </div>
@@ -640,25 +636,19 @@
         <div class="videos-section">
             <h2>Videos Destacados</h2>
             <div class="videos-grid">
-                <!-- Video 1 -->
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/8iMbzhBfCtU" title="Conflicto Sur 1.2.9 Mod - Battlefield 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
-                <!-- Video 2 -->
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/B1fuOMRYPK4" title="Gameplay Conflicto Sur Mod" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <!-- TARJETA DE APOYO AL PROYECTO -->
             <div class="support-box">
-                <div class="support-title">
-                    🔴 ¡Apoya el Proyecto!
-                </div>
+                <div class="support-title">🔴 ¡Apoya el Proyecto!</div>
                 <p class="support-text">
                     Suscríbete a mi canal de YouTube, dale "Me Gusta" y deja tus comentarios en los videos. ¡Tu apoyo es fundamental para seguir desarrollando y mejorando el mod de Conflicto Sur!
                 </p>
-
                 <a href="https://www.youtube.com/@caelmiranda9845" target="_blank" rel="noopener noreferrer" class="yt-btn">
                     ▶ Ir al Canal de YouTube
                 </a>
@@ -691,13 +681,11 @@
         <div class="downloads-section">
             <h2>Enlaces de Descarga</h2>
             
-            <!-- CAPTCHA -->
             <div class="captcha-box" id="captchaContainer">
                 <input type="checkbox" id="captchaCheck" onchange="verificarCaptcha(this)">
                 <label for="captchaCheck" class="captcha-label">No soy un robot</label>
             </div>
 
-            <!-- TARJETA VERDE DE ENLACES (MOMENTÁNEAMENTE OCULTA) -->
             <div class="download-card" id="downloadCard">
                 <div class="download-card-title">
                     ¡Verificación completada con éxito! Selecciona tu versión:
@@ -713,11 +701,11 @@
             </div>
         </div>
 
-        <!-- SECCIÓN DE COMENTARIOS -->
+        <!-- SECCIÓN DE COMENTARIOS (CONECTADA A FIREBASE EN TIEMPO REAL) -->
         <div class="comments-section">
             <h2>Comentarios</h2>
             
-            <form id="commentForm" onsubmit="agregarComentario(event)">
+            <form id="commentForm">
                 <input 
                     type="text" 
                     id="authorInput" 
@@ -737,7 +725,7 @@
             </form>
 
             <div class="comments-list" id="commentsList">
-                <p class="empty-comments" id="emptyMessage">Aún no hay comentarios. ¡Sé el primero!</p>
+                <p class="empty-comments" id="emptyMessage">Cargando comentarios...</p>
             </div>
         </div>
     </div>
@@ -752,17 +740,17 @@
     <!-- Elemento Audio Oculto -->
     <audio id="bgMusic" preload="auto"></audio>
 
-    <!-- VENTANA EMERGENTE DE IMAGEN MAXIMIZADA (LIGHTBOX) -->
+    <!-- VENTANA EMERGENTE DE IMAGEN MAXIMIZADA -->
     <div id="imageModal" class="modal" onclick="cerrarImagen(event)">
         <span class="close-modal" onclick="cerrarImagenDirecto()">&times;</span>
         <img class="modal-content" id="imgMaximizada">
     </div>
 
+    <!-- SCRIPT DEL SISTEMA GENERAL -->
     <script>
         // LÓGICA DEL CAPTCHA DE DESCARGA
         function verificarCaptcha(checkbox) {
             if (checkbox.checked) {
-                // Simulación de pequeña pausa de verificación
                 setTimeout(() => {
                     document.getElementById('captchaContainer').style.display = 'none';
                     document.getElementById('downloadCard').style.display = 'block';
@@ -786,11 +774,9 @@
             audioPlayer.src = playlist[index];
         }
 
-        // Cargar primera pista
         cargarPista(currentTrackIndex);
         audioPlayer.volume = 0.5;
 
-        // Pasar a la siguiente canción al terminar
         audioPlayer.addEventListener('ended', function() {
             currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
             cargarPista(currentTrackIndex);
@@ -821,7 +807,6 @@
             }
         }
 
-        // Inicio automático tras la primera interacción
         function iniciarAudioAutomatico() {
             if (!autoplayStarted) {
                 autoplayStarted = true;
@@ -840,7 +825,7 @@
         document.addEventListener('keydown', iniciarAudioAutomatico);
         document.addEventListener('touchstart', iniciarAudioAutomatico);
 
-        // FUNCIÓN DE MAXIMIZAR IMAGEN
+        // GALERÍA
         function abrirImagen(imgElement) {
             const modal = document.getElementById('imageModal');
             const imgMax = document.getElementById('imgMaximizada');
@@ -864,63 +849,79 @@
             }
         });
 
-        // FUNCIONES DE REACCIONES Y COMENTARIOS
+        // ME GUSTA
         function darMeGusta() {
             const badge = document.getElementById('like-badge');
             const baseUrl = badge.src.split('&t=')[0];
             badge.src = baseUrl + '&t=' + new Date().getTime();
         }
+    </script>
 
-        document.addEventListener('DOMContentLoaded', cargarComentarios);
+    <!-- INTEGRACIÓN MÓDULO FIREBASE PARA COMENTARIOS REALES Y PÚBLICOS -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        function agregarComentario(event) {
-            event.preventDefault();
+      // Tus credenciales extraídas directamente de la captura
+      const firebaseConfig = {
+        apiKey: "AIzaSyD5HUBQLbdZ2qBW3b1JkzdQnAtG-WYwh04",
+        authDomain: "conflicto-sur.firebaseapp.com",
+        databaseURL: "https://conflicto-sur-default-rtdb.firebaseio.com",
+        projectId: "conflicto-sur",
+        storageBucket: "conflicto-sur.firebasestorage.app",
+        messagingSenderId: "527090892111",
+        appId: "1:527090892111:web:e9b16ed7f7394f5349d93a"
+      };
 
-            const authorInput = document.getElementById('authorInput');
-            const commentInput = document.getElementById('commentInput');
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const commentsRef = ref(db, 'comentarios');
 
-            const author = authorInput.value.trim();
-            const text = commentInput.value.trim();
+      // Escuchar y cargar comentarios públicos en tiempo real
+      onValue(commentsRef, (snapshot) => {
+        const data = snapshot.val();
+        const list = document.getElementById('commentsList');
 
-            if (!author || !text) return;
-
-            const nuevoComentario = { author, text, date: new Date().toLocaleDateString() };
-
-            let comentarios = JSON.parse(localStorage.getItem('mis_comentarios') || '[]');
-            comentarios.unshift(nuevoComentario);
-
-            localStorage.setItem('mis_comentarios', JSON.stringify(comentarios));
-
-            authorInput.value = '';
-            commentInput.value = '';
-
-            renderizarComentarios(comentarios);
+        if (!data) {
+          list.innerHTML = '<p class="empty-comments">Aún no hay comentarios. ¡Sé el primero!</p>';
+          return;
         }
 
-        function cargarComentarios() {
-            let comentarios = JSON.parse(localStorage.getItem('mis_comentarios') || '[]');
-            renderizarComentarios(comentarios);
-        }
+        const comentariosArray = Object.values(data).reverse();
 
-        function renderizarComentarios(comentarios) {
-            const list = document.getElementById('commentsList');
+        list.innerHTML = comentariosArray.map(c => `
+            <div class="comment-item">
+                <div class="comment-author">${escapeHtml(c.author)}</div>
+                <p class="comment-text">${escapeHtml(c.text)}</p>
+            </div>
+        `).join('');
+      });
 
-            if (comentarios.length === 0) {
-                list.innerHTML = '<p class="empty-comments">Aún no hay comentarios. ¡Sé el primero!</p>';
-                return;
-            }
+      // Publicar nuevo comentario visible para todos
+      document.getElementById('commentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
 
-            list.innerHTML = comentarios.map(c => `
-                <div class="comment-item">
-                    <div class="comment-author">${escapeHtml(c.author)}</div>
-                    <p class="comment-text">${escapeHtml(c.text)}</p>
-                </div>
-            `).join('');
-        }
+        const authorInput = document.getElementById('authorInput');
+        const commentInput = document.getElementById('commentInput');
 
-        function escapeHtml(str) {
-            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-        }
+        const author = authorInput.value.trim();
+        const text = commentInput.value.trim();
+
+        if (!author || !text) return;
+
+        push(commentsRef, {
+          author: author,
+          text: text,
+          timestamp: Date.now()
+        });
+
+        authorInput.value = '';
+        commentInput.value = '';
+      });
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+      }
     </script>
 
 </body>
