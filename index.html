@@ -230,6 +230,101 @@
             filter: brightness(1.15);
         }
 
+        /* SECCIÓN DE DESCARGAS Y CAPTCHA */
+        .downloads-section {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 25px;
+            text-align: center;
+        }
+
+        .downloads-section h2 {
+            color: #ffcc00;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* Caja del Captcha */
+        .captcha-box {
+            background: rgba(20, 20, 25, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .captcha-box input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #22c55e;
+        }
+
+        .captcha-label {
+            font-size: 16px;
+            color: #ffffff;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Tarjeta Verde de Descarga (Basada en la imagen) */
+        .download-card {
+            display: none; /* Oculto hasta resolver el captcha */
+            background: #143528;
+            border: 1px solid #2d6a4f;
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .download-card-title {
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+
+        .download-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: #38c172;
+            color: #052e16;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            padding: 14px 20px;
+            border-radius: 8px;
+            transition: background-color 0.2s, transform 0.15s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn:hover {
+            background-color: #2eab63;
+            transform: translateY(-2px);
+        }
+
         /* MODAL / LIGHTBOX PARA MAXIMIZAR IMAGEN */
         .modal {
             display: none;
@@ -457,7 +552,7 @@
             cursor: pointer;
         }
 
-        /* Botón del slider (Thumb) en navegadores WebKit/Chrome/Safari */
+        /* Botón del slider (Thumb) */
         .volume-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -470,7 +565,6 @@
             cursor: pointer;
         }
 
-        /* Botón del slider en Firefox */
         .volume-slider::-moz-range-thumb {
             width: 18px;
             height: 18px;
@@ -593,6 +687,32 @@
             </div>
         </div>
 
+        <!-- SECCIÓN DE DESCARGAS (CON CAPTCHA) -->
+        <div class="downloads-section">
+            <h2>Enlaces de Descarga</h2>
+            
+            <!-- CAPTCHA -->
+            <div class="captcha-box" id="captchaContainer">
+                <input type="checkbox" id="captchaCheck" onchange="verificarCaptcha(this)">
+                <label for="captchaCheck" class="captcha-label">No soy un robot</label>
+            </div>
+
+            <!-- TARJETA VERDE DE ENLACES (MOMENTÁNEAMENTE OCULTA) -->
+            <div class="download-card" id="downloadCard">
+                <div class="download-card-title">
+                    ¡Verificación completada con éxito! Selecciona tu versión:
+                </div>
+                <div class="download-links">
+                    <a href="https://drive.google.com/file/d/1CEFhE_VNMaGfO-jxI_FsZfzvXzopDvYN/view" target="_blank" rel="noopener noreferrer" class="download-btn">
+                        📦 Descargar Mod (Para agregar a BF2 instalado)
+                    </a>
+                    <a href="https://drive.google.com/file/d/1f0fHK1XcDQzFYszrFsfS7FUiKsi6l847/view?pli=1" target="_blank" rel="noopener noreferrer" class="download-btn">
+                        🚀 Descargar Versión Portable (No requiere BF2)
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- SECCIÓN DE COMENTARIOS -->
         <div class="comments-section">
             <h2>Comentarios</h2>
@@ -639,6 +759,17 @@
     </div>
 
     <script>
+        // LÓGICA DEL CAPTCHA DE DESCARGA
+        function verificarCaptcha(checkbox) {
+            if (checkbox.checked) {
+                // Simulación de pequeña pausa de verificación
+                setTimeout(() => {
+                    document.getElementById('captchaContainer').style.display = 'none';
+                    document.getElementById('downloadCard').style.display = 'block';
+                }, 500);
+            }
+        }
+
         // CONFIGURACIÓN DEL REPRODUCTOR DE MÚSICA
         const playlist = [
             'audio/pista1.mp3',
@@ -678,7 +809,6 @@
 
         function ajustarVolumen(valor) {
             audioPlayer.volume = valor;
-            // Actualizar el color dinamico de la barra del slider
             const porcentaje = valor * 100;
             volumeSlider.style.background = `linear-gradient(to right, #eab308 ${porcentaje}%, #e2e8f0 ${porcentaje}%)`;
             
@@ -691,7 +821,7 @@
             }
         }
 
-        // Inicio automático tras la primera interacción del usuario en la pantalla
+        // Inicio automático tras la primera interacción
         function iniciarAudioAutomatico() {
             if (!autoplayStarted) {
                 autoplayStarted = true;
