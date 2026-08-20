@@ -134,6 +134,51 @@
             filter: brightness(1.15);
         }
 
+        /* MODAL / LIGHTBOX PARA MAXIMIZAR IMAGEN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: zoomIn 0.25s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+
+        .close-modal:hover {
+            color: #ff3333;
+        }
+
         /* CONTADORES */
         .counter-container {
             display: flex;
@@ -332,21 +377,21 @@
         <div class="gallery-section">
             <h2>Galería de Imágenes</h2>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="imagenes/1.jpg" alt="Imagen 1"></div>
-                <div class="gallery-item"><img src="imagenes/2.jpg" alt="Imagen 2"></div>
-                <div class="gallery-item"><img src="imagenes/3.jpg" alt="Imagen 3"></div>
-                <div class="gallery-item"><img src="imagenes/4.jpg" alt="Imagen 4"></div>
-                <div class="gallery-item"><img src="imagenes/5.jpg" alt="Imagen 5"></div>
-                <div class="gallery-item"><img src="imagenes/6.jpg" alt="Imagen 6"></div>
-                <div class="gallery-item"><img src="imagenes/7.jpg" alt="Imagen 7"></div>
-                <div class="gallery-item"><img src="imagenes/8.jpg" alt="Imagen 8"></div>
-                <div class="gallery-item"><img src="imagenes/9.jpg" alt="Imagen 9"></div>
-                <div class="gallery-item"><img src="imagenes/10.jpg" alt="Imagen 10"></div>
-                <div class="gallery-item"><img src="imagenes/11.jpg" alt="Imagen 11"></div>
-                <div class="gallery-item"><img src="imagenes/12.jpg" alt="Imagen 12"></div>
-                <div class="gallery-item"><img src="imagenes/13.jpg" alt="Imagen 13"></div>
-                <div class="gallery-item"><img src="imagenes/14.jpg" alt="Imagen 14"></div>
-                <div class="gallery-item"><img src="imagenes/15.jpg" alt="Imagen 15"></div>
+                <div class="gallery-item"><img src="imagenes/1.jpg" alt="Imagen 1" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/2.jpg" alt="Imagen 2" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/3.jpg" alt="Imagen 3" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/4.jpg" alt="Imagen 4" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/5.jpg" alt="Imagen 5" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/6.jpg" alt="Imagen 6" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/7.jpg" alt="Imagen 7" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/8.jpg" alt="Imagen 8" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/9.jpg" alt="Imagen 9" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/10.jpg" alt="Imagen 10" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/11.jpg" alt="Imagen 11" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/12.jpg" alt="Imagen 12" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/13.jpg" alt="Imagen 13" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/14.jpg" alt="Imagen 14" onclick="abrirImagen(this)"></div>
+                <div class="gallery-item"><img src="imagenes/15.jpg" alt="Imagen 15" onclick="abrirImagen(this)"></div>
             </div>
         </div>
 
@@ -379,7 +424,40 @@
         </div>
     </div>
 
+    <!-- VENTANA EMERGENTE DE IMAGEN MAXIMIZADA (LIGHTBOX) -->
+    <div id="imageModal" class="modal" onclick="cerrarImagen(event)">
+        <span class="close-modal" onclick="cerrarImagenDirecto()">&times;</span>
+        <img class="modal-content" id="imgMaximizada">
+    </div>
+
     <script>
+        // FUNCIÓN DE MAXIMIZAR IMAGEN
+        function abrirImagen(imgElement) {
+            const modal = document.getElementById('imageModal');
+            const imgMax = document.getElementById('imgMaximizada');
+            modal.style.display = 'flex';
+            imgMax.src = imgElement.src;
+        }
+
+        function cerrarImagen(event) {
+            // Solo se cierra si se hace clic en el fondo oscuro
+            if (event.target.id === 'imageModal') {
+                document.getElementById('imageModal').style.display = 'none';
+            }
+        }
+
+        function cerrarImagenDirecto() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Cerrar con tecla Escape (ESC)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('imageModal').style.display = 'none';
+            }
+        });
+
+        // FUNCIONES DE REACCIONES Y COMENTARIOS
         function darMeGusta() {
             const badge = document.getElementById('like-badge');
             const baseUrl = badge.src.split('&t=')[0];
