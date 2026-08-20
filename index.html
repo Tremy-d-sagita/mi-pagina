@@ -93,6 +93,47 @@
             font-size: 15px;
         }
 
+        /* ESTILOS DE LA GALERÍA DE IMÁGENES */
+        .gallery-section {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 25px;
+        }
+
+        .gallery-section h2 {
+            color: #ffcc00;
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+            aspect-ratio: 16 / 9;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease, filter 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.08);
+            filter: brightness(1.15);
+        }
+
         /* CONTADORES */
         .counter-container {
             display: flex;
@@ -233,20 +274,20 @@
         <h1 class="welcome-title">¡Bienvenidos a mi página!</h1>
         <p class="subtitle">Gracias por visitar mi sitio web.</p>
 
-        <!-- Títulos solicitados -->
+        <!-- Títulos del Mod -->
         <h1 class="mod-title">Conflicto Sur Mod</h1>
         <h2 class="battle-subtitle">Campo de Batalla</h2>
 
         <!-- Bloques de Contadores -->
         <div class="counter-container">
-            <!-- Visitas con 👀 -->
+            <!-- Visitas -->
             <div class="counter-box">
                 <p>Visitas:</p>
                 <!-- REEMPLAZA "tu-usuario" CON TU USUARIO REAL DE GITHUB -->
                 <img src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Ftu-usuario%2Fmi-pagina-visitas&label=%F0%9F%91%80%20Visitas&count_bg=%232563EB&title=Visitas" alt="Visitas"/>
             </div>
 
-            <!-- Me Gusta con ❤️ -->
+            <!-- Me Gusta -->
             <div class="counter-box">
                 <p>¿Te gusta esta página?</p>
                 <button class="like-btn" onclick="darMeGusta()">👍 ¡Me gusta!</button>
@@ -285,6 +326,29 @@
             <p>El proyecto también refleja el proceso de aprendizaje y evolución de su creador, Miranda Tremy (TremyDsagita), quien previamente worked con otros mods y mapas antes de desarrollar su propia conversión total.</p>
 
             <p>En definitiva, Conflicto Sur es un proyecto que busca llevar la experiencia de Battlefield 2 a un escenario poco habitual dentro del modding del juego: una Sudamérica ficticia convertida en escenario de conflictos militares, ofreciendo a los jugadores una perspectiva regional y personalizada del clásico título de DICE.</p>
+        </div>
+
+        <!-- SECCIÓN DE GALERÍA DE IMÁGENES -->
+        <div class="gallery-section">
+            <h2>Galería de Imágenes</h2>
+            <div class="gallery-grid">
+                <!-- Si subiste las imágenes directo con nombres 1.jpg, 2.jpg... -->
+                <div class="gallery-item"><img src="1.jpg" alt="Imagen 1"></div>
+                <div class="gallery-item"><img src="2.jpg" alt="Imagen 2"></div>
+                <div class="gallery-item"><img src="3.jpg" alt="Imagen 3"></div>
+                <div class="gallery-item"><img src="4.jpg" alt="Imagen 4"></div>
+                <div class="gallery-item"><img src="5.jpg" alt="Imagen 5"></div>
+                <div class="gallery-item"><img src="6.jpg" alt="Imagen 6"></div>
+                <div class="gallery-item"><img src="7.jpg" alt="Imagen 7"></div>
+                <div class="gallery-item"><img src="8.jpg" alt="Imagen 8"></div>
+                <div class="gallery-item"><img src="9.jpg" alt="Imagen 9"></div>
+                <div class="gallery-item"><img src="10.jpg" alt="Imagen 10"></div>
+                <div class="gallery-item"><img src="11.jpg" alt="Imagen 11"></div>
+                <div class="gallery-item"><img src="12.jpg" alt="Imagen 12"></div>
+                <div class="gallery-item"><img src="13.jpg" alt="Imagen 13"></div>
+                <div class="gallery-item"><img src="14.jpg" alt="Imagen 14"></div>
+                <div class="gallery-item"><img src="15.jpg" alt="Imagen 15"></div>
+            </div>
         </div>
 
         <!-- SECCIÓN DE COMENTARIOS -->
