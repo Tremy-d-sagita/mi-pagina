@@ -407,6 +407,79 @@
             font-size: 14px;
             margin-top: 15px;
         }
+
+        /* REPRODUCTOR DE MÚSICA FLOTANTE ESTILO IMAGEN */
+        .music-player-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            background-color: #0a0a0a;
+            border: 2px solid #eab308;
+            border-radius: 50px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            user-select: none;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            color: #38bdf8;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            outline: none;
+        }
+
+        .music-label {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Personalización del Range Slider */
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 90px;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #eab308 50%, #e2e8f0 50%);
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Botón del slider (Thumb) en navegadores WebKit/Chrome/Safari */
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #64748b;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
+
+        /* Botón del slider en Firefox */
+        .volume-slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #64748b;
+            border: 2px solid #ffffff;
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -491,6 +564,7 @@
                 <p class="support-text">
                     Suscríbete a mi canal de YouTube, dale "Me Gusta" y deja tus comentarios en los videos. ¡Tu apoyo es fundamental para seguir desarrollando y mejorando el mod de Conflicto Sur!
                 </p>
+
                 <a href="https://www.youtube.com/@caelmiranda9845" target="_blank" rel="noopener noreferrer" class="yt-btn">
                     ▶ Ir al Canal de YouTube
                 </a>
@@ -548,6 +622,16 @@
         </div>
     </div>
 
+    <!-- REPRODUCTOR DE MÚSICA FLOTANTE -->
+    <div class="music-player-widget">
+        <button id="musicToggleBtn" class="music-btn" onclick="togglePlayPause()">🔊</button>
+        <span class="music-label">Música</span>
+        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="0.5" oninput="ajustarVolumen(this.value)">
+    </div>
+
+    <!-- Elemento Audio Oculto -->
+    <audio id="bgMusic" preload="auto"></audio>
+
     <!-- VENTANA EMERGENTE DE IMAGEN MAXIMIZADA (LIGHTBOX) -->
     <div id="imageModal" class="modal" onclick="cerrarImagen(event)">
         <span class="close-modal" onclick="cerrarImagenDirecto()">&times;</span>
@@ -555,6 +639,77 @@
     </div>
 
     <script>
+        // CONFIGURACIÓN DEL REPRODUCTOR DE MÚSICA
+        const playlist = [
+            'audio/pista1.mp3',
+            'audio/pista2.mp3',
+            'audio/pista3.mp3'
+        ];
+        let currentTrackIndex = 0;
+        const audioPlayer = document.getElementById('bgMusic');
+        const musicToggleBtn = document.getElementById('musicToggleBtn');
+        const volumeSlider = document.getElementById('volumeSlider');
+        let autoplayStarted = false;
+
+        function cargarPista(index) {
+            audioPlayer.src = playlist[index];
+        }
+
+        // Cargar primera pista
+        cargarPista(currentTrackIndex);
+        audioPlayer.volume = 0.5;
+
+        // Pasar a la siguiente canción al terminar
+        audioPlayer.addEventListener('ended', function() {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            cargarPista(currentTrackIndex);
+            audioPlayer.play();
+        });
+
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                musicToggleBtn.innerHTML = '🔊';
+            } else {
+                audioPlayer.pause();
+                musicToggleBtn.innerHTML = '🔇';
+            }
+        }
+
+        function ajustarVolumen(valor) {
+            audioPlayer.volume = valor;
+            // Actualizar el color dinamico de la barra del slider
+            const porcentaje = valor * 100;
+            volumeSlider.style.background = `linear-gradient(to right, #eab308 ${porcentaje}%, #e2e8f0 ${porcentaje}%)`;
+            
+            if (valor == 0) {
+                musicToggleBtn.innerHTML = '🔇';
+            } else if (audioPlayer.paused) {
+                musicToggleBtn.innerHTML = '🔇';
+            } else {
+                musicToggleBtn.innerHTML = '🔊';
+            }
+        }
+
+        // Inicio automático tras la primera interacción del usuario en la pantalla
+        function iniciarAudioAutomatico() {
+            if (!autoplayStarted) {
+                autoplayStarted = true;
+                audioPlayer.play().then(() => {
+                    musicToggleBtn.innerHTML = '🔊';
+                }).catch(() => {
+                    musicToggleBtn.innerHTML = '🔇';
+                });
+                document.removeEventListener('click', iniciarAudioAutomatico);
+                document.removeEventListener('keydown', iniciarAudioAutomatico);
+                document.removeEventListener('touchstart', iniciarAudioAutomatico);
+            }
+        }
+
+        document.addEventListener('click', iniciarAudioAutomatico);
+        document.addEventListener('keydown', iniciarAudioAutomatico);
+        document.addEventListener('touchstart', iniciarAudioAutomatico);
+
         // FUNCIÓN DE MAXIMIZAR IMAGEN
         function abrirImagen(imgElement) {
             const modal = document.getElementById('imageModal');
